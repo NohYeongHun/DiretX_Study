@@ -2,7 +2,6 @@
 #include "TableDescriptorHeap.h"
 #include "Engine.h"
 
-// 디스크립터 힙 초기화
 void TableDescriptorHeap::Init(uint32 count)
 {
 	_groupCount = count;
@@ -18,13 +17,11 @@ void TableDescriptorHeap::Init(uint32 count)
 	_groupSize = _handleSize * REGISTER_COUNT;
 }
 
-// 디스크립터 힙 클리어
 void TableDescriptorHeap::Clear()
 {
 	_currentGroupIndex = 0;
 }
 
-// CBV View 생성
 void TableDescriptorHeap::SetCBV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, CBV_REGISTER reg)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE destHandle = GetCPUHandle(reg);
@@ -34,7 +31,15 @@ void TableDescriptorHeap::SetCBV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, CBV_REGI
 	DEVICE->CopyDescriptors(1, &destHandle, &destRange, 1, &srcHandle, &srcRange, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
-// Table 생성
+void TableDescriptorHeap::SetSRV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, SRV_REGISTER reg)
+{
+	D3D12_CPU_DESCRIPTOR_HANDLE destHandle = GetCPUHandle(reg);
+
+	uint32 destRange = 1;
+	uint32 srcRange = 1;
+	DEVICE->CopyDescriptors(1, &destHandle, &destRange, 1, &srcHandle, &srcRange, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+}
+
 void TableDescriptorHeap::CommitTable()
 {
 	D3D12_GPU_DESCRIPTOR_HANDLE handle = _descHeap->GetGPUDescriptorHandleForHeapStart();
@@ -44,14 +49,17 @@ void TableDescriptorHeap::CommitTable()
 	_currentGroupIndex++;
 }
 
-// CPU 핸들 얻어오기
 D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptorHeap::GetCPUHandle(CBV_REGISTER reg)
 {
-	return GetCPUHandle(static_cast<uint32>(reg));
+	return GetCPUHandle(static_cast<uint8>(reg));
 }
 
-// CPU 핸들 얻어오기
-D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptorHeap::GetCPUHandle(uint32 reg)
+D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptorHeap::GetCPUHandle(SRV_REGISTER reg)
+{
+	return GetCPUHandle(static_cast<uint8>(reg));
+}
+
+D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptorHeap::GetCPUHandle(uint8 reg)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE handle = _descHeap->GetCPUDescriptorHandleForHeapStart();
 	handle.ptr += _currentGroupIndex * _groupSize;

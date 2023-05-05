@@ -65,9 +65,7 @@ void ConstantBuffer::CreateView()
 		D3D12_CPU_DESCRIPTOR_HANDLE cbvHandle = GetCpuHandle(i);
 
 		D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc = {};
-		// 버퍼 주소
 		cbvDesc.BufferLocation = _cbvBuffer->GetGPUVirtualAddress() + static_cast<uint64>(_elementSize) * i;
-		// 버퍼의 사이즈 => 각 버퍼마다 뷰 하나씩 매칭된다.
 		cbvDesc.SizeInBytes = _elementSize;   // CB size is required to be 256-byte aligned.
 
 		DEVICE->CreateConstantBufferView(&cbvDesc, cbvHandle);
@@ -86,7 +84,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE ConstantBuffer::PushData(int32 rootParamIndex, void*
 	::memcpy(&_mappedBuffer[_currentIndex * _elementSize], buffer, size);
 
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = GetCpuHandle(_currentIndex);
-
+	
 	_currentIndex++;
 
 	return cpuHandle;
