@@ -1,46 +1,55 @@
-ï»¿// Engine.cpp : ì •ì  ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ìœ„í•œ í•¨ìˆ˜ë¥¼ ì •ì˜í•©ë‹ˆë‹¤.
-//
-
 #include "pch.h"
-#include "framework.h"
 #include "Engine.h"
-#include "Device.h"
-#include "CommandQueue.h"
-#include "SwapChain.h"
-#include "DescriptorHeap.h"
-
-
-
 
 void Engine::Init(const WindowInfo& info)
 {
 	_window = info;
 	ResizeWindow(info.width, info.height);
 
-	// ê·¸ë ¤ì§ˆ í™”ë©´ í¬ê¸°ë¥¼ ì„¤ì •
+	// ±×·ÁÁú È­¸é Å©±â¸¦ ¼³Á¤
 	_viewport = { 0, 0, static_cast<FLOAT>(info.width), static_cast<FLOAT>(info.height), 0.0f, 1.0f };
 	_scissorRect = CD3DX12_RECT(0, 0, info.width, info.height);
 
 	_device = make_shared<Device>();
 	_cmdQueue = make_shared<CommandQueue>();
 	_swapChain = make_shared<SwapChain>();
-	_descHeap = make_shared<DescriptorHeap>();
+	_rootSignature = make_shared<RootSignature>();
+	// »ó¼ö ¹öÆÛ¿¡ ´ëÇÑ shared_ptr »ı¼º
+	_cb = make_shared<ConstantBuffer>();
 
-	// ì´ˆê¸°í™” ëª©ë¡, _device, _cmdQueue, _swapChain, _descHeap;
 	_device->Init();
-	_cmdQueue->Init(_device->GetDevice(), _swapChain, _descHeap);
-
+	_cmdQueue->Init(_device->GetDevice(), _swapChain);
+	_swapChain->Init(info, _device->GetDevice(), _device->GetDXGI(), _cmdQueue->GetCmdQueue());
+	_rootSignature->Init(_device->GetDevice());
+	// »ó¼ö ¹öÆÛ ÃÊ±âÈ­
+	_cb->Init(sizeof(Transform), 256);
 }
 
 void Engine::Render()
 {
+	RenderBegin();
 
+	// TODO : ³ª¸ÓÁö ¹°Ã¼µé ±×·ÁÁØ´Ù
+
+	RenderEnd();
+}
+
+void Engine::RenderBegin()
+{
+	_cmdQueue->RenderBegin(&_viewport, &_scissorRect);
+}
+
+void Engine::RenderEnd()
+{
+	_cmdQueue->RenderEnd();
 }
 
 void Engine::ResizeWindow(int32 width, int32 height)
 {
+	_window.width = width;
+	_window.height = height;
+
 	RECT rect = { 0, 0, width, height };
-	// :: <= ìœˆë„ìš° í‘œì¤€ ë¼ì´ë¸ŒëŸ¬ë¦¬ë¼ëŠ”ê²ƒì„ ë‚˜íƒ€ë‚´ëŠ” í‘œì‹œ
-	::AdjustWindowRect(&rect, WS_EX_OVERLAPPEDWINDOW, false);
+	::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 	::SetWindowPos(_window.hwnd, 0, 100, 100, width, height, 0);
 }

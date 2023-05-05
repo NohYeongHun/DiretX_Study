@@ -19,7 +19,6 @@ void Device::Init()
 	// CreateDXGIFactory
 	// - riid : 디바이스의 COM ID
 	// - ppDevice : 생성된 장치가 매개변수에 설정
-	// #define IID_PPV_ARGS(ppType) __uuidof(**(ppType)), IID_PPV_ARGS_Helper(ppType)
 	::CreateDXGIFactory(IID_PPV_ARGS(&_dxgi));
 
 	// CreateDevice
