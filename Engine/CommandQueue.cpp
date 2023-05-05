@@ -71,6 +71,7 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 
 	// 작업 단위에 작업 기술서를 등록한다.
 	_cmdList->SetGraphicsRootSignature(ROOT_SIGNATURE.Get());
+	// 작업 시작전 상수 버퍼의 작업을 Clear()한다.
 	GEngine->GetCB()->Clear();
 
 	_cmdList->ResourceBarrier(1, &barrier);
