@@ -4,7 +4,6 @@
 class DepthStencilBuffer
 {
 public:
-	// DXGI_FORMAT_D32_FLOAT == 40
 	void Init(const WindowInfo& window, DXGI_FORMAT dsvFormat = DXGI_FORMAT_D32_FLOAT);
 
 	D3D12_CPU_DESCRIPTOR_HANDLE	GetDSVCpuHandle() { return _dsvHandle; }

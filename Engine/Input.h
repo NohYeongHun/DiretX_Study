@@ -2,11 +2,11 @@
 
 enum class KEY_TYPE
 {
-	// VK_UP 같은 것은 WINDOWS에서 제공하는 키매핑.
 	UP = VK_UP,
 	DOWN = VK_DOWN,
 	LEFT = VK_LEFT,
 	RIGHT = VK_RIGHT,
+
 	W = 'W',
 	A = 'A',
 	S = 'S',
@@ -24,7 +24,7 @@ enum class KEY_STATE
 
 enum
 {
-	KEY_TYPE_COUNT = static_cast<int32>(UINT8_MAX),
+	KEY_TYPE_COUNT = static_cast<int32>(UINT8_MAX + 1),
 	KEY_STATE_COUNT = static_cast<int32>(KEY_STATE::END),
 };
 
@@ -46,7 +46,6 @@ private:
 
 private:
 	HWND _hwnd;
-	// 현재 누른 상태를 확인하는 벡터.
 	vector<KEY_STATE> _states;
 };
 

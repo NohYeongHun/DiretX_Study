@@ -1,10 +1,9 @@
 #include "pch.h"
 #include "Game.h"
 #include "Engine.h"
+#include "Material.h"
 
 shared_ptr<Mesh> mesh = make_shared<Mesh>();
-shared_ptr<Shader> shader = make_shared<Shader>();
-shared_ptr<Texture> texture = make_shared<Texture>();
 
 void Game::Init(const WindowInfo& info)
 {
@@ -38,9 +37,20 @@ void Game::Init(const WindowInfo& info)
 
 	mesh->Init(vec, indexVec);
 
+	shared_ptr<Shader> shader = make_shared<Shader>();
+	shared_ptr<Texture> texture = make_shared<Texture>();
 	shader->Init(L"..\\Resources\\Shader\\default.hlsli");
+	texture->Init(L"..\\Resources\\Texture\\jinx.jpg");
 
-	texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
+	// Material은 하나의 객체로 보는게 좋음
+	// EX) 오크는 모두 같은 Material이다.
+	shared_ptr<Material> material = make_shared<Material>();
+	material->SetShader(shader);
+	material->SetFloat(0, 0.3f);
+	material->SetFloat(1, 0.3f);
+	material->SetFloat(2, 0.3f);
+	material->SetTexture(0, texture);
+	mesh->SetMaterial(material);
 
 	GEngine->GetCmdQueue()->WaitSync();
 }
@@ -51,12 +61,9 @@ void Game::Update()
 
 	GEngine->RenderBegin();
 
-	shader->Update();
-
 	{
 		static Transform t = {};
 
-		// DELTA_TIME => 이전프레임에서 다음 프레임으로 이동되는 시간.
 		if (INPUT->GetButton(KEY_TYPE::W))
 			t.offset.y += 1.f * DELTA_TIME;
 		if (INPUT->GetButton(KEY_TYPE::S))
@@ -67,8 +74,6 @@ void Game::Update()
 			t.offset.x += 1.f * DELTA_TIME;
 
 		mesh->SetTransform(t);
-
-		mesh->SetTexture(texture);
 
 		mesh->Render();
 	}

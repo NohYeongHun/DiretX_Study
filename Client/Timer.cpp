@@ -3,7 +3,6 @@
 
 void Timer::Init()
 {
-	// Window에서 제공하는 함수
 	::QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&_frequency));
 	::QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&_prevCount)); // CPU 클럭
 }
@@ -21,7 +20,6 @@ void Timer::Update()
 
 	if (_frameTime > 1.f)
 	{
-		// 초당 실행된 개수
 		_fps = static_cast<uint32>(_frameCount / _frameTime);
 
 		_frameTime = 0.f;

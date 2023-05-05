@@ -11,10 +11,6 @@ void Input::Init(HWND hwnd)
 void Input::Update()
 {
 	HWND hwnd = ::GetActiveWindow();
-	/*
-	* 현재 사용하고 있는 창이 캐릭터를 움직일 수 있는 화면이 아니라면?
-	* 입력을 받지 않는다. _states[key] = KEY_STATE::NONE;
-	*/
 	if (_hwnd != hwnd)
 	{
 		for (uint32 key = 0; key < KEY_TYPE_COUNT; key++)
@@ -23,10 +19,19 @@ void Input::Update()
 		return;
 	}
 
+	
+	BYTE asciiKeys[KEY_TYPE_COUNT] = {};
+	/*
+		지정된 가상 키의 상태를 검색합니다.
+		상태는 키가 위쪽, 아래쪽 또는 토글(켜기, 해제- 키를 누를 때마다 번갈아 가며) 여부를 지정
+	*/
+	if (::GetKeyboardState(asciiKeys) == false)
+		return;
+
 	for (uint32 key = 0; key < KEY_TYPE_COUNT; key++)
 	{
 		// 키가 눌려 있으면 true
-		if (::GetAsyncKeyState(key) & 0x8000)
+		if (asciiKeys[key] & 0x80)
 		{
 			KEY_STATE& state = _states[key];
 
