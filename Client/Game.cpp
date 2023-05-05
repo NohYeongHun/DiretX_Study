@@ -40,7 +40,7 @@ void Game::Init(const WindowInfo& info)
 
 	shader->Init(L"..\\Resources\\Shader\\default.hlsli");
 
-	texture->Init(L"..\\Resources\\Texture\\jinx.jpg");
+	texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
 
 	GEngine->GetCmdQueue()->WaitSync();
 }
@@ -52,14 +52,29 @@ void Game::Update()
 	shader->Update();
 
 	{
+		// 3번째 좌표값이 깊이값. 0 ~ 1 사이의 값으로 그림
+		// 깊이가 0에 가까울 수록 앞에 있음
 		Transform t;
-		t.offset = Vec4(0.f, 0.f, 0.f, 0.f);
+		t.offset = Vec4(0.1f, 0.1f, 0.2f, 0.f);
 		mesh->SetTransform(t);
 
 		mesh->SetTexture(texture);
 
 		mesh->Render();
 	}
+
+	{
+		// 나중에 그려졌지만 깊이가 0에 가까우므로 앞에 보여짐!.
+		Transform t;
+		t.offset = Vec4(0.5f, 0.5f, 0.1f, 0.f);
+		mesh->SetTransform(t);
+
+		mesh->SetTexture(texture);
+
+		mesh->Render();
+	}
+
+
 
 	GEngine->RenderEnd();
 }
