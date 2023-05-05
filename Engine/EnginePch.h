@@ -43,4 +43,14 @@ using Vec3 = XMFLOAT3;
 using Vec4 = XMFLOAT4;
 using Matrix = XMMATRIX;
 
-void HelloEngine();
+struct WindowInfo
+{
+	HWND	hwnd; // 출력 윈도우
+	int32	width; // 너비
+	int32	height; // 높이
+	bool	windowed; // 창모드 or 전체 화면
+};
+
+// EnginePch.h 를 사용하면 GEngine에 접근 가능.
+// 전방선언.
+extern unique_ptr<class Engine> GEngine;
