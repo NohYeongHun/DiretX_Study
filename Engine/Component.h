@@ -21,7 +21,6 @@ class Component
 {
 public:
 	Component(COMPONENT_TYPE type);
-	// Memory leak ¿¹¹æ
 	virtual ~Component();
 
 public:

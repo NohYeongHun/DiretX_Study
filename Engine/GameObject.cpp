@@ -83,7 +83,6 @@ shared_ptr<Transform> GameObject::GetTransform()
 
 void GameObject::AddComponent(shared_ptr<Component> component)
 {
-	// weak_ptr 제공 => mutable weak_ptr<_Ty> _Wptr;
 	component->SetGameObject(shared_from_this());
 
 	uint8 index = static_cast<uint8>(component->GetType());
@@ -93,8 +92,6 @@ void GameObject::AddComponent(shared_ptr<Component> component)
 	}
 	else
 	{
-		// dynamic_cast => 스마트포인터끼리 작업할때 사용. 동적 포인터 변환.
-		// Component객체를 MonoBehaviour 타입으로 변환
 		_scripts.push_back(dynamic_pointer_cast<MonoBehaviour>(component));
 	}
 }
