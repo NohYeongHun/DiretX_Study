@@ -37,7 +37,6 @@ protected:
 	virtual void Save(const wstring& path) { }
 
 protected:
-	
 	OBJECT_TYPE _objectType = OBJECT_TYPE::NONE;
 	wstring _name;
 };
