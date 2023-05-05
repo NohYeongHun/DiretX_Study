@@ -35,7 +35,7 @@
     <ClInclude Include="Game.h">
       <Filter>소스 파일\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
+    <ClInclude Include="..\Engine\Timer.h">
       <Filter>소스 파일\Utils</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
+    <ClCompile Include="..\Engine\Timer.cpp">
       <Filter>소스 파일\Utils</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,19 +11,19 @@
       <UniqueIdentifier>{710a24eb-3b22-4cba-b53b-42897f27a6d4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager">
-      <UniqueIdentifier>{4282273c-d192-434a-8f75-2486d27d9616}</UniqueIdentifier>
+      <UniqueIdentifier>{25b3214d-e145-4b49-8e9d-908a06998ffa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object">
-      <UniqueIdentifier>{ff1de08b-8f6f-4136-ad9f-cd3e5c6badb4}</UniqueIdentifier>
+      <UniqueIdentifier>{dd23f47d-3ac2-4f96-9bfe-4a6fac248639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Test">
+      <UniqueIdentifier>{1cfe4b64-4ca1-4958-b16f-73f8ae1985c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component">
+      <UniqueIdentifier>{915d1c10-9db1-4fdb-887a-d0160f593ea1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\Resource">
       <UniqueIdentifier>{c5612518-9c4d-408d-926a-9312743d39fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Component">
-      <UniqueIdentifier>{7696a07e-1913-4560-88f0-c558c79fa49f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Test">
-      <UniqueIdentifier>{542fadbe-e8d0-4cfd-b667-f5c2784c3080}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,16 +69,19 @@
     <ClCompile Include="Material.cpp">
       <Filter>Object\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Manager</Filter>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
+    <ClCompile Include="SceneManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
+    <ClCompile Include="Input.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="SimpleMath.cpp">
@@ -87,7 +90,10 @@
     <ClCompile Include="TestCameraScript.cpp">
       <Filter>Object\Test</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="Resources.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
@@ -104,12 +110,6 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Object\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources.cpp">
-      <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Object\Component</Filter>
@@ -161,16 +161,19 @@
     <ClInclude Include="Material.h">
       <Filter>Object\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Manager</Filter>
+    <ClInclude Include="GameObject.h">
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
+    <ClInclude Include="SceneManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
+    <ClInclude Include="Input.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="SimpleMath.h">
@@ -179,7 +182,10 @@
     <ClInclude Include="TestCameraScript.h">
       <Filter>Object\Test</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="Resources.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
@@ -197,27 +203,21 @@
     <ClInclude Include="Transform.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SimpleMath.inl">
-      <Filter>Utils</Filter>
-    </None>
     <None Include="..\Resources\Shader\default.hlsli">
       <Filter>Shader</Filter>
     </None>
-    <None Include="..\Resources\Shader\utils.hlsli">
-      <Filter>Shader</Filter>
+    <None Include="SimpleMath.inl">
+      <Filter>Utils</Filter>
     </None>
     <None Include="..\Resources\Shader\params.hlsli">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\Resources\Shader\utils.hlsli">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>
