@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Engine.h"
 #include "Material.h"
+#include "Transform.h"
 
 void Engine::Init(const WindowInfo& info)
 {
@@ -20,8 +21,7 @@ void Engine::Init(const WindowInfo& info)
 	_input->Init(info.hwnd);
 	_timer->Init();
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Transform), 256);
-	// Material에 사용할 인자들을 b1 레지스터에 제공(hlsl파일-> 세이더 컴파일 속성에 정의되어 있음)
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformMatrix), 256);
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	ResizeWindow(info.width, info.height);
@@ -42,6 +42,11 @@ void Engine::Update()
 	_timer->Update();
 
 	ShowFps();
+}
+
+void Engine::LateUpdate()
+{
+	// TODO
 }
 
 void Engine::RenderBegin()

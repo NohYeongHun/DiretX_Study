@@ -4,7 +4,6 @@ cbuffer TEST_B0 : register(b0)
     float4 offset0;
 };
 
-// Material에 사용할 것들을 정의 => b1 레지스터에서 사용할
 cbuffer MATERIAL_PARAMS : register(b1)
 {
     int int_0;

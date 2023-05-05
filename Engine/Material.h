@@ -1,6 +1,5 @@
 #pragma once
 
-// 전방선언
 class Shader;
 class Texture;
 
@@ -16,7 +15,6 @@ struct MaterialParams
 	void SetInt(uint8 index, int32 value) { intParams[index] = value; }
 	void SetFloat(uint8 index, float value) { floatParams[index] = value; }
 
-	// 고정 크기 배열
 	array<int32, MATERIAL_INT_COUNT> intParams;
 	array<float, MATERIAL_FLOAT_COUNT> floatParams;
 };

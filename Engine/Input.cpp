@@ -19,12 +19,7 @@ void Input::Update()
 		return;
 	}
 
-	
 	BYTE asciiKeys[KEY_TYPE_COUNT] = {};
-	/*
-		지정된 가상 키의 상태를 검색합니다.
-		상태는 키가 위쪽, 아래쪽 또는 토글(켜기, 해제- 키를 누를 때마다 번갈아 가며) 여부를 지정
-	*/
 	if (::GetKeyboardState(asciiKeys) == false)
 		return;
 
