@@ -47,15 +47,25 @@ void Game::Init(const WindowInfo& info)
 
 void Game::Update()
 {
+	GEngine->Update();
+
 	GEngine->RenderBegin();
 
 	shader->Update();
 
 	{
-		// 3번째 좌표값이 깊이값. 0 ~ 1 사이의 값으로 그림
-		// 깊이가 0에 가까울 수록 앞에 있음
-		Transform t;
-		t.offset = Vec4(0.1f, 0.1f, 0.2f, 0.f);
+		static Transform t = {};
+
+		// DELTA_TIME => 이전프레임에서 다음 프레임으로 이동되는 시간.
+		if (INPUT->GetButton(KEY_TYPE::W))
+			t.offset.y += 1.f * DELTA_TIME;
+		if (INPUT->GetButton(KEY_TYPE::S))
+			t.offset.y -= 1.f * DELTA_TIME;
+		if (INPUT->GetButton(KEY_TYPE::A))
+			t.offset.x -= 1.f * DELTA_TIME;
+		if (INPUT->GetButton(KEY_TYPE::D))
+			t.offset.x += 1.f * DELTA_TIME;
+
 		mesh->SetTransform(t);
 
 		mesh->SetTexture(texture);
@@ -63,18 +73,15 @@ void Game::Update()
 		mesh->Render();
 	}
 
-	{
-		// 나중에 그려졌지만 깊이가 0에 가까우므로 앞에 보여짐!.
+	/*{
 		Transform t;
-		t.offset = Vec4(0.5f, 0.5f, 0.1f, 0.f);
+		t.offset = Vec4(0.f, 0.f, 0.3f, 0.f);
 		mesh->SetTransform(t);
 
 		mesh->SetTexture(texture);
 
 		mesh->Render();
-	}
-
-
+	}*/
 
 	GEngine->RenderEnd();
 }
