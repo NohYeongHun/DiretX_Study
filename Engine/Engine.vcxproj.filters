@@ -123,6 +123,12 @@
     <ClCompile Include="StructuredBuffer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="InstancingManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancingBuffer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -222,6 +228,12 @@
       <Filter>Object\Component</Filter>
     </ClInclude>
     <ClInclude Include="StructuredBuffer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancingManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancingBuffer.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
