@@ -49,7 +49,7 @@ VS_OUT VS_Main(VS_IN input)
         output.viewNormal = normalize(mul(float4(input.normal, 0.f), g_matWV).xyz);
         output.viewTangent = normalize(mul(float4(input.tangent, 0.f), g_matWV).xyz);
         output.viewBinormal = normalize(cross(output.viewTangent, output.viewNormal));
-    }
+    }   
 
     return output;
 }
